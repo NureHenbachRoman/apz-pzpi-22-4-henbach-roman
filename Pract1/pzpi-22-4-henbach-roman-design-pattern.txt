@@ -1,0 +1,284 @@
+﻿МІНІСТЕРСТВО ОСВІТИ І НАУКИ УКРАЇНИ
+ 
+ХАРКІВСЬКИЙ НАЦІОНАЛЬНИЙ
+УНІВЕРСИТЕТ РАДІОЕЛЕКТРОНІКИ
+ 
+Кафедра «Програмна інженерія»
+ 
+ 
+ЗВІТ
+до практичного заняття №1 з дисципліни
+«Архітектура програмного забезпечення»
+На тему: «Патерни проєктування»
+
+ 
+ 
+Виконав:                                                           	Прийняв:
+ст. гр. ПЗПІ-22-4                                    	       	ст. викладач кафедри ПІ 
+Геньбач Роман Максимович                                  Сокорчук Ігор Петрович
+						
+
+
+
+
+
+
+
+Харків 2025
+Історія змін
+Таблиця 1 – Історія змін
+№ДатаВерсія звітуОпис змін та виправлень110.03.20250.1Звіт створено210.03.20250.2Створено код для презентації (див. додаток В)311.03.20250.3Створено слайди презентації (див. додаток Б)412.03.20250.4Створено відеозапис доповіді (див. додаток А)
+
+
+ЗАВДАННЯ
+1. Підготувати доповідь на тему: «Шаблон (патерн) проєктування ПЗ»
+(із книг: Ґамма, “ООП. Патерни проєктування”, GoF, крім патерна Singletone)
+2. Створити та оформити слайди презентації доповіді
+3. Створити та опублікувати на YouTube відеозапис доповіді
+4. Оформити та завантажити на dl.nure.ua звіт до виконаної роботи
+5. При потребі створити та налаштувати у GitHub обліковий запис для облікового запису студента в домені @nure.ua
+6. Створити GitHub репозиторій з вказаним далі іменем для виконання завдань з дисципліни
+7. Створити у корені створеного репозиторію файл README.md з вказаним далі змістом та вказані далі директорії для окремих завдань
+8. Експортувати звіт у файл у простому текстововому форматі та завантажити цей файл у директорію Pract1 у репозиторії GitHub
+9. Завантажити у вказану далі піддиректорію увесь програмний код, який розглядається у доповіді ПЗ1
+
+ОПИС ВИКОНАНОЇ РОБОТИ
+     Було обрано шаблон проєктування «Прототип».
+     Посилання на відеозапис доповіді і хронологічний опис до нього наведено в додатку А.
+     На слайдах презентації (див. додаток Б) наведено опис цього шаблону, проблему, яку він вирішує, з прикладом її розв’язання; описано, коли доречно використовувати цей шаблон. Фрагменти програмного коду, використані у презентації, наведені в додатку В.
+
+ВИСНОВКИ
+     Досліджено шаблон проєктування програмного забезпечення «Прототип» і підготовано доповідь про нього. 
+     
+
+ДОДАТОК А
+     Відеозапис доповіді на YouTube: https://youtu.be/RByuSvrJlmQ
+     00:00 Представлення, титульний слайд 
+     00:12 Вступ: що таке шаблон проєктування? 
+     01:15 Про що "Прототип"? 
+     02:00 Яку проблему вирішує шаблон "Прототип"? 
+     03:33 Перший крок до розв'язання проблеми 
+     04:50 Повне розв'язання проблеми – реалізація шаблону 
+     07:10 Подальший крок: реєстр прототипів 
+     09:16 Коли використовувати "Прототип": копіювання без прив'язки до класів 
+     09:50 Коли використовувати "Прототип": велика кількість нащадків-конфігурацій 
+     10:10 Переваги і недоліки шаблону "Прототип" 
+     11:27 Список використаних джерел
+
+
+ДОДАТОК Б
+Слайди презентації на тему «Шаблон (патерн) проєктування «Прототип»».
+
+Рисунок Б.1 – Титульний слайд презентації
+
+
+Рисунок Б.2 – Вступ: про шаблони проєктування
+
+
+Рисунок Б.3 – Про що шаблон «Прототип»?
+
+
+Рисунок Б.4 – Опис проблеми, яку вирішує шаблон
+
+
+Рисунок Б.5 – Перший крок до розв’язання проблеми за допомогою шаблону
+
+
+Рисунок Б.6 – Опис розв’язання проблеми
+
+
+Рисунок Б.7 – Про реєстр прототипів
+
+
+Рисунок Б.8 – Опис випадків, у яких доречне використання шаблону «Прототип»
+
+
+Рисунок Б.9 – Опис переваг і недоліків шаблону
+
+
+Рисунок Б.10 – Список використаних джерел
+
+
+ДОДАТОК В
+Фрагменти програмного коду, використані у презентації
+
+	Файл FlyingMachine.cs до рефакторингу:
+ 1  abstract class FlyingMachine
+ 2  {
+ 3      public string name;
+ 4      protected Engine Engine { get; }
+ 5  
+ 6      public FlyingMachine(string name, Engine engine)
+ 7      {
+ 8          this.name = name;
+ 9          Engine = engine;
+10      }
+11      
+12      abstract public void fly();
+13  }
+	
+     Файл Plane.cs до рефакторингу:
+ 1  class Plane : FlyingMachine
+ 2  {
+ 3      public double WingLength { get; }
+ 4  
+ 5      public Plane(string name, Engine engine, double wingLength) 
+ 6          : base(name, engine)
+ 7      {
+ 8          WingLength = wingLength;
+ 9      }
+10  
+11      public override void Fly()
+12      {
+13          Console.WriteLine("Plane " + name + " took off.");
+14      }
+	
+     Файл Program.cs до рефакторингу:
+ 1  class Program
+ 2  {
+ 3      public static void Main(string[] args)
+ 4      {
+ 5          FlyingMachine plane = new Plane(
+ 6              "PlaneText", 
+ 7              new Engine("Powerly123", 3), 
+ 8              5.5);
+ 9  
+10          FlyingMachine plane1 = new Plane(
+11              plane.name,
+12              plane.Engine,
+13              plane.WingLength);
+14      }
+15  }
+	
+     Файл FlyingMachine.cs після першого кроку рефакторингу:
+ 1  abstract class FlyingMachine
+ 2  {
+ 3      public string name;
+ 4      protected Engine Engine { get; }
+ 5  
+ 6      public FlyingMachine(string name, Engine engine)
+ 7      {
+ 8          this.name = name;
+ 9          Engine = engine;
+10      }
+11  
+12      public FlyingMachine(FlyingMachine other)
+13      {
+14          name = other.name;
+15          Engine = other.Engine;
+16      }
+17  
+18      abstract public void Fly();
+19  }
+	
+     Файл Plane.cs після першого кроку рефакторингу:
+ 1  class Plane : FlyingMachine
+ 2  {
+ 3      public double WingLength { get; }
+ 4  
+ 5      public Plane(string name, Engine engine, double wingLength) 
+ 6          : base(name, engine)
+ 7      {
+ 8          WingLength = wingLength;
+ 9      }
+10  
+11      public Plane(Plane other) : base(other)
+12      {
+13          WingLength = other.WingLength;
+14      }
+15  
+16      public override void Fly()
+17      {
+18          Console.WriteLine("Plane " + name + " took off.");
+19      }
+     
+     
+     Файл Program.cs після першого кроку рефакторингу:
+ 1  class Program
+ 2  {
+ 3      public static void Main(string[] args)
+ 4      {
+ 5          FlyingMachine plane = new Plane(
+ 6              "PlaneText", 
+ 7              new Engine("Powerly123", 3), 
+ 8              5.5);
+ 9  
+10          FlyingMachine plane1 = new Plane((Plane)plane);
+11          FlyingMachine plane2 = new Plane(plane);
+12      }
+     
+     Файл FlyingMachine.cs після рефакторингу:
+ 1  abstract class FlyingMachine
+ 2  {
+ 3      public string name;
+ 4      protected Engine Engine { get; }
+ 5  
+ 6      public FlyingMachine(string name, Engine engine)
+ 7      {
+ 8          this.name = name;
+ 9          Engine = engine;
+10      }
+11  
+12      public FlyingMachine(FlyingMachine other)
+13      {
+14          name = other.name;
+15          Engine = other.Engine;
+16      }
+17  
+18      public abstract FlyingMachine Clone();
+19  
+20      public abstract void Fly();
+21  }
+     
+     Файл Plane.cs після рефакторингу:
+ 1  class Plane : FlyingMachine
+ 2  {
+ 3      public double WingLength { get; }
+ 4  
+ 5      public Plane(string name, Engine engine, double wingLength) 
+ 6          : base(name, engine)
+ 7      {
+ 8          WingLength = wingLength;
+ 9      }
+10  
+11      public Plane(Plane other) : base(other)
+12      {
+13          WingLength = other.WingLength;
+14      }
+15  
+16      public override FlyingMachine Clone()
+17      {
+18          return new Plane(this);
+19      }
+20  
+21      public override void Fly()
+22      {
+23          Console.WriteLine("Plane " + name + " took off.");
+24      }
+25  }
+     
+     Файл Program.cs після рефакторингу:
+ 1  class Program
+ 2  {
+ 3      public static void Main(string[] args)
+ 4      {
+ 5          Plane plane = new("PlaneText", new Engine("Powerly123", 3), 5.5);
+ 6          Helicopter helicopter = new("Helium", new Engine("RoTaCo", 5), 4);
+ 7  
+ 8          List<FlyingMachine> flyingMachines = new() { plane, helicopter };
+ 9          List<FlyingMachine> copiedFlyingMachines = new();
+10  
+11          foreach (FlyingMachine flyingMachine in flyingMachines)
+12          {
+13              FlyingMachine copiedFlyingMachine = flyingMachine.Clone();
+14              copiedFlyingMachine.Fly();
+15              copiedFlyingMachines.Add(copiedFlyingMachine);
+16          }
+17      }
+18  } 
+
+2
+
+
+
+
